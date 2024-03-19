@@ -36,8 +36,8 @@ def driver():
         platformName='Android',
         automationName='uiautomator2',
         deviceName='emulator-5554',
-        appPackage='com.android.settings',
-        appActivity='.Settings',
+        appPackage='com.tradingview.tradingviewapp.test',
+        appActivity='com.tradingview.tradingviewapp.module.splash.view.SplashActivity',
         language='en',
         locale='US'
     )
