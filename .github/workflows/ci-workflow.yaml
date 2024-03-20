@@ -6,9 +6,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    services:
-      # Если потребуется сервис для базы данных или другие зависимые сервисы
-
     steps:
     - uses: actions/checkout@v2
 
