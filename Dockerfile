@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y openjdk-11-jdk
 RUN npm install -g appium
 
 # Установка драйверов для Appium
-RUN npm install -g appium-uiautomator2-driver
+RUN appium driver install uiautomator2
 
 # Установка плагинов Appium, если они нужны
 # Пример: RUN appium plugin install --source=npm <имя_плагина>

@@ -42,7 +42,7 @@ def driver():
         locale='US'
     )
 
-    appium_server_url = 'http://localhost:4723'
+    appium_server_url = 'http://127.0.0.1:4723'
 
     options = UiAutomator2Options()
     options.load_capabilities(capabilities)

@@ -19,6 +19,9 @@ jobs:
     - name: Install Appium drivers
       run: docker exec android-test-container bash -c "npm install -g appium-uiautomator2-driver && appium driver install uiautomator2"
 
+    - name: List installed Appium drivers
+      run: docker exec android-test-container appium driver list --installed
+
     - name: Wait for Appium
       run: |
         while ! curl -s http://localhost:4723/status; do
