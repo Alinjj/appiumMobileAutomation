@@ -23,4 +23,4 @@ jobs:
         done
 
     - name: Run tests
-      run: docker exec android-test-container pytest /app/test_webapp.py
+      run: docker exec android-test-container pytest /app/appiumtests/test_webapp.py
