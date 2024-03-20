@@ -1,11 +1,14 @@
 # Используйте базовый образ с предустановленным Android SDK и Node.js
 FROM reactnativecommunity/react-native-android
 
+# Установка Java
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+
 # Установите Appium
 RUN npm install -g appium
 
 # Установка драйверов для Appium
-RUN npm install -g appium-uiautomator2-driver appium-xcuitest-driver
+RUN npm install -g appium-uiautomator2-driver
 
 # Установка плагинов Appium, если они нужны
 # Пример: RUN appium plugin install --source=npm <имя_плагина>
