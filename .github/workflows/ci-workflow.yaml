@@ -1,0 +1,26 @@
+name: Android CI
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build . -t android-test-image
+
+    - name: Run Docker container
+      run: |
+        docker run --name android-test-container -d -p 4723:4723 android-test-image
+
+    - name: Wait for Appium
+      run: |
+        while ! curl -s http://localhost:4723/status; do
+          sleep 1
+        done
+
+    - name: Run tests
+      run: docker exec android-test-container pytest /app/test_webapp.py
