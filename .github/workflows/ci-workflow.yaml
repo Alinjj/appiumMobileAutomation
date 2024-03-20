@@ -6,6 +6,9 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    services:
+      # Если потребуется сервис для базы данных или другие зависимые сервисы
+
     steps:
     - uses: actions/checkout@v2
 
@@ -14,20 +17,18 @@ jobs:
 
     - name: Run Docker container
       run: |
-        docker run --name android-test-container -d -p 4723:4723 android-test-image
-
-
-    #- name: Install Appium drivers
-    #  run: docker exec android-test-container bash -c "npm install -g appium-uiautomator2-driver && appium driver install uiautomator2"
-
-    - name: List installed Appium drivers
-      run: docker exec android-test-container appium driver list --installed
+        docker run -d --name android-test-container -p 4723:4723 android-test-image
 
     - name: Wait for Appium
       run: |
-        while ! curl -s http://localhost:4723/status; do
-          sleep 1
+        echo "Waiting for Appium..."
+        until $(curl --output /dev/null --silent --head --fail http://localhost:4723/wd/hub/status); do
+          printf '.'
+          sleep 5
         done
+
+    - name: Install Appium drivers
+      run: docker exec android-test-container appium driver install uiautomator2
 
     - name: Run tests
       run: docker exec android-test-container pytest /app/appiumtests/test_webapp.py
